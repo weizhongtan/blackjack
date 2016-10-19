@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Blackjack game</title>
+    <link rel="css.css" type="text/css">
+  </head>
+  <body>
+    <div class="wrapper">
+    	<h1>Blackjack</h1>
+    	<div class="game">
+    		<div class="bet">
+    			<p>Place your bet</p>
+    			<p>Your cash: £<span id="cash"></span></p>
+    			<p>Bet: £ <button id="bet" onclick="button_bet()">-</button>
+    				<button id="play" onclick="button_play()">play</button>
+    			</p>
+    		</div>
+    		<div class="play">
+    			<p>Your hand: <span id="player"></span> <span id="playerbust"></span> </p>
+    			<button id="hit" onclick="button_hit()">hit</button>
+    			<button id="stay" onclick="button_stay()">stand</button>
+    			<p>Dealer's hand: <span id="dealer"></span> <span id="dealerbust"></span> </p>
+    			<p><span id="result"></span></p>
+    		</div>
+    	</div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>

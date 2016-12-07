@@ -9,10 +9,6 @@ dealer and player are dealt two random cards
 player can choose to hit (take another card) or
 */
 
-/*
-current issues: when you go bust it breaks
-*/
-
 // GAME SETTINGS
 var BET_INCREMENT = 100;
 var STARTING_MONEY = 1000;

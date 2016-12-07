@@ -20,18 +20,39 @@
 }
 
 .highlighted {
-	-webkit-animation-name: demo;
+	-webkit-animation-name: highlight;
 	-webkit-animation-duration: 0.3s;
     -webkit-animation-iteration-count: 1;
     -webkit-animation-timing-function: ease-in-out;
 }
 
-@-webkit-keyframes demo {
+@-webkit-keyframes highlight {
     0% {
         background-color: orange;
         opacity:1;
     }
     100% {
         background-color: #fff;
+    }
+}
+
+.card {
+	width: 81px;
+	height: 117px;
+	background: url('cards_sprite.gif') no-repeat;
+	display: inline-block;
+	-webkit-animation-name: slidein;
+	-webkit-animation-duration: 0.5s;
+	-webkit-animation-iteration-count: 1;
+	-webkit-animation-timing-function: ease-in;
+}
+
+@-webkit-keyframes slidein {
+    0% {
+			transform: translate(0, 40px);
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
     }
 }

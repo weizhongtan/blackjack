@@ -85,6 +85,9 @@ function button_play() {
 	bettingover = true;
 	renderBets();
 
+	// enable play area;
+	document.getElementsByClassName("play")[0].style.display = "block";
+
 	_deck = generateDeck();
 
 	// inital hands
@@ -120,14 +123,12 @@ function render() {
 		} else if (person == "dealer") {
 			_cardsShownDealer = cards_shown;
 		}
-		$id(person +"sum").innerHTML = "(sum: " + renderSum(hand) + ")";
 	}
 
 	showCards("player", playerHand, _cardsShownPlayer);
-
-	$id("playerbust").innerHTML = (playerbust) ? " -> BUST!" : "";
+	$id("playersum").innerHTML = (playerbust) ? "BUST!" : renderSum(playerHand);
 	showCards("dealer", dealerHand, _cardsShownDealer);
-	$id("dealerbust").innerHTML = (dealerbust) ? " -> BUST!" : "";
+	$id("dealersum").innerHTML = (dealerbust) ? "BUST!" : renderSum(dealerHand);
 
 	// disable/enable buttons
 	$id("hit").disabled = playerbust;
@@ -155,7 +156,6 @@ function render() {
 
 function renderBets() {
 	$id("cash").innerHTML = cash.toString();
-
 	$id("bet").innerHTML = betamount.toString();
 	$id("bet").disabled = bettingover;
 	$id("play").disabled = bettingover;
@@ -172,7 +172,6 @@ function button_hit() {
 	playerHand.push(randomCard(_deck));
 	playerbust = checkIfBust(playerHand);
 	bettingover = true;
-	highlight("player");
 	render();
 
 	if (playerbust) {
@@ -187,7 +186,6 @@ function button_stay() {
 	}
 	dealerbust = checkIfBust(dealerHand);
 	result = whoWins();
-	highlight("dealer");
 	render();
 
 	init();

@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Blackjack game</title>
+    <title>Play Blackjack</title>
     <link rel="stylesheet" type="text/css" href="css.css">
   </head>
   <body>
@@ -10,17 +10,18 @@
     	<h1>Blackjack</h1>
     	<div class="game">
     		<div class="bet">
-    			<p>Place your bet</p>
-    			<p>Your cash: £<span id="cash"></span></p>
+    			<p>Cash: £<span id="cash"></span></p>
     			<p>Bet: £ <button id="bet" onclick="button_bet()">-</button>
     				<button id="play" onclick="button_play()">play</button>
     			</p>
     		</div>
     		<div class="play">
-    			<p>Your hand: <span id="player"></span> <span id="playersum"></span> <span id="playerbust"></span> </p>
+    			<p>Your hand: <span id="playersum"></span></p>
+          <div id="player"></div>
     			<button id="hit" onclick="button_hit()">hit</button>
     			<button id="stay" onclick="button_stay()">stand</button>
-    			<p>Dealer's hand: <span id="dealer"></span> <span id="dealersum"></span> <span id="dealerbust"></span> </p>
+    			<p>Dealer's hand: <span id="dealersum"></span></p>
+          <div id="dealer"></div>
     			<p><span id="result"></span></p>
     		</div>
     	</div>

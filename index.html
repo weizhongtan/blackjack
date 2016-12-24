@@ -4,16 +4,22 @@
     <meta charset="utf-8">
     <title>Play Blackjack</title>
     <link rel="stylesheet" type="text/css" href="css.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   </head>
   <body>
     <div class="wrapper">
     	<h1>Blackjack</h1>
     	<div class="game">
     		<div class="bet">
+          <div class="left">
     			<p>Cash: £<span id="cash"></span></p>
     			<p>Bet: £ <button id="bet" onclick="button_bet()">-</button>
     				<button id="play" onclick="button_play()">play</button>
     			</p>
+          </div>
+          <div class="right">
+            <button id="reset" onclick="button_resetCash()">reset cash</button>
+          </div>
     		</div>
     		<div class="play">
     			<p>Your hand: <span id="playersum"></span></p>

@@ -40,6 +40,11 @@ button:hover {
 	border-radius: 5px;
 }
 
+.left, .right {
+	display: inline-block;
+	width: 49%;
+}
+
 .play {
 	padding: 10px;
 	display: none;

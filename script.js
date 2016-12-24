@@ -4,14 +4,23 @@
 52 cards
 aim is to get as close to 21 as possible
 if you beat the dealer you win
-if you get 5 cards under 21 you win - not implemented yet
 dealer and player are dealt two random cards
 player can choose to hit (take another card) or
 */
 
+/* To do:
+if you get 5 cards under 21 you win
+*/
+
 // GAME SETTINGS
 var BET_INCREMENT = 100;
-var STARTING_MONEY = 1000;
+
+// Access localStorage from previous game session
+if (localStorage.getItem("player_money")) {
+	var STARTING_MONEY = localStorage.getItem("player_money");
+} else {
+	var STARTING_MONEY = 1000;
+}
 
 // deck must be global since it changes throughout the game
 var _deck, playerHand, dealerHand, playerbust = false, dealerbust = false, dealersTurn = false, result, bettingover = false, betamount, cash = STARTING_MONEY;
@@ -51,9 +60,12 @@ function generateCardSprites(d) {
 }
 
 function startBets() {
+	localStorage.setItem("player_money", cash);
 	if (cash !== 0) {
 		betamount = BET_INCREMENT;
 		cash -= betamount;
+	} else {
+		betamount = 0;
 	}
 	bettingover = false;
 	playerbust = false;
@@ -81,6 +93,7 @@ function generateDeck() {
 }
 
 function button_play() {
+	localStorage.setItem("player_money", cash);
 	// disable betting area
 	bettingover = true;
 	renderBets();
@@ -94,10 +107,6 @@ function button_play() {
 	playerHand = generateHand(_deck);
 	dealerHand = [randomCard(_deck)];
 
-	// FOR TESTING PURPOSES
-	// playerHand = [[10], ["ACE"]]
-	// dealerHand = [[10], ["ACE"]]
-
 	// render html
 	render()
 
@@ -105,6 +114,12 @@ function button_play() {
 	function generateHand(deck) {
 		return [randomCard(deck), randomCard(deck)]
 	}
+}
+
+function button_resetCash() {
+	cash = 1000;
+	localStorage.setItem("player_money", cash);
+	init();
 }
 
 function render() {
@@ -156,9 +171,10 @@ function render() {
 
 function renderBets() {
 	$id("cash").innerHTML = cash.toString();
-	$id("bet").innerHTML = betamount.toString();
+	$id("bet").innerHTML = "<i class='material-icons'>add_circle_outline</i>" + betamount.toString();
 	$id("bet").disabled = bettingover;
 	$id("play").disabled = bettingover;
+	$id("reset").disabled = bettingover;
 }
 
 // returns random card from deck and removes it from the deck
@@ -176,16 +192,22 @@ function button_hit() {
 
 	if (playerbust) {
 		init()
+	} else if (_cardsShownPlayer = 5) {
+		button_stay(true)
 	}
 }
 
-function button_stay() {
+function button_stay(five_card) {
 	dealersTurn = true;
 	while (bestSum(dealerHand) < 17) {
 		dealerHand.push(randomCard(_deck));
 	}
 	dealerbust = checkIfBust(dealerHand);
-	result = whoWins();
+	if (five_card == true) {
+		result = whoWins(true)
+	} else {
+		result = whoWins()
+	}
 	render();
 
 	init();
@@ -228,10 +250,10 @@ function checkIfBust(hand) {
 	return (Math.min(amounts[0], amounts[1]) > 21) ? true : false;
 }
 
-function whoWins() {
+function whoWins(five_card) {
 	if (playerbust) {
 		return lose();
-	} else if (dealerbust || bestSum(playerHand) > bestSum(dealerHand)) {
+	} else if (dealerbust || bestSum(playerHand) > bestSum(dealerHand) || five_card == true) {
 		cash += betamount*2;
 		betamount = 0;
 		highlight("cash");

@@ -74,7 +74,7 @@ button:hover {
 .card {
 	width: 81px;
 	height: 117px;
-	background: url('cards_sprite.gif') no-repeat;
+	background: url(../images/cards_sprite.gif) no-repeat;
 	display: inline-block;
 	margin: 5px;
 	-webkit-animation-name: slidein;

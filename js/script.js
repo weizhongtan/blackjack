@@ -108,7 +108,7 @@ function button_play() {
 	dealerHand = [randomCard(_deck)];
 
 	// render html
-	render()
+	render();
 
 	// generate initial 2 card hand
 	function generateHand(deck) {
@@ -290,10 +290,3 @@ function highlight(cls) {
 }
 
 init();
-
-// console
-// check();
-
-// function check() {
-// 	console.log("playerhand:", playerHand, "dealer:", dealerHand, "deck size:", deck.length)
-// }

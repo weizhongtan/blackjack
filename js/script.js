@@ -153,6 +153,7 @@ function render() {
 		showCards("dealer", dealerHand, _cardsShownDealer);
 		if (result) setTimeout(function() {
 			$id("result").innerHTML = "You " + result;
+			highlight("result");
 		}, 1000);
 
 		// disable/enable buttons
@@ -292,11 +293,12 @@ function button_bet() {
 	highlight("cash");
 }
 
-function highlight(cls) {
-	$id(cls).className = "highlighted";
+// highlight dom elements with id given
+function highlight(id) {
+	$id(id).className = "highlighted";
 	setTimeout(function() {
-		$id(cls).className = "";
-	}, 500)
+		$id(id).className = "";
+	}, 1000)
 }
 
 init();

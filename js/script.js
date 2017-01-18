@@ -151,7 +151,9 @@ function render() {
 
 	if (dealersTurn) {
 		showCards("dealer", dealerHand, _cardsShownDealer);
-		$id("result").innerHTML = "you " + result;
+		if (result) setTimeout(function() {
+			$id("result").innerHTML = "You " + result;
+		}, 1000);
 
 		// disable/enable buttons
 		$id("hit").disabled = true;
@@ -192,25 +194,32 @@ function button_hit() {
 
 	if (playerbust) {
 		init()
-	} else if (_cardsShownPlayer = 5) {
+	} else if (_cardsShownPlayer == 5) {
 		button_stay(true)
 	}
 }
 
 function button_stay(five_card) {
 	dealersTurn = true;
-	while (bestSum(dealerHand) < 17) {
+	function getDealerNewCard() {
+		console.log("getting new card")
 		dealerHand.push(randomCard(_deck));
+		dealerbust = checkIfBust(dealerHand);
+		render();
+		if (bestSum(dealerHand) < 17) {
+			setTimeout(getDealerNewCard, 1000);
+		} else {
+			if (five_card == true) {
+				result = whoWins(true)
+			} else {
+				result = whoWins()
+			}
+			render();
+			init();
+		}
 	}
-	dealerbust = checkIfBust(dealerHand);
-	if (five_card == true) {
-		result = whoWins(true)
-	} else {
-		result = whoWins()
-	}
-	render();
 
-	init();
+	getDealerNewCard();
 }
 
 // returns an array of the highest and lowest possible sums of a given hand
@@ -250,6 +259,7 @@ function checkIfBust(hand) {
 	return (Math.min(amounts[0], amounts[1]) > 21) ? true : false;
 }
 
+// five_card indicates that the player has a 5 card hand below 21 which makes them win in nearly all scenarios
 function whoWins(five_card) {
 	if (playerbust) {
 		return lose();

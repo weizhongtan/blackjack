@@ -9,11 +9,12 @@ h1 {
 	text-align: center;
 }
 
-button {
+button, button:active, button:focus {
 	background-color: #262626;
 	border-style: none;
 	border-radius: 0.5em;
 	padding: 0.3em;
+	box-shadow: none;
 }
 
 button:disabled {
@@ -22,7 +23,8 @@ button:disabled {
 }
 
 button:hover {
-	background-color: #9e9e9e
+	background-color: #9e9e9e;
+	transform: scale(1.1);
 }
 
 .game {
